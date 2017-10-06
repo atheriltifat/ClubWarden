@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item> <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorAccent">@color/colorAccent</item><!--color effects, EditText, RadioButtons...-->
+        <item name="windowActionBar">false</item><!-- needed to suppress the old ActionBar when using the new Toolbar -->
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">#33691E</item><!-- changes dialog bground color -->
+        <item name="android:textColor">#FFFFFF</item><!-- changes btn and title text color -->
+        <!--<item name="colorAccent">#FF00FF</item> changes btn text color   -->
+        <item name="android:textColorPrimary">#FFFFFF</item><!-- changes msg color -->
+    </style>
+
+</resources>

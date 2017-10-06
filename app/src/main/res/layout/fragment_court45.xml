@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:id="@+id/tblLayout2Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#424242"
+        android:shrinkColumns="*"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:id="@+id/tblRow1Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTimingsFr45"
+                style="@style/tblHeaderCell"
+                android:layout_marginRight="3dp"
+                android:layout_weight="0.26"
+                android:text="Timings"></TextView>
+
+            <TextView
+                android:id="@+id/tvCrt4Fr45"
+                style="@style/tblHeaderCell"
+                android:layout_marginRight="3dp"
+                android:layout_weight="0.3689"
+                android:text="Platz 4"></TextView>
+
+            <TextView
+                android:id="@+id/tvCrt5Fr45"
+                style="@style/tblHeaderCell"
+                android:layout_weight="0.3689"
+                android:text="Platz 5"></TextView>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutFr45PBar"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:visibility="gone">
+        <ProgressBar
+            android:id="@+id/fr45PBar"
+            style="android:style/progressBarStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#424242"
+        android:shrinkColumns="*"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:id="@+id/tblRow2Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS1Fr45"
+                style="@style/timingsCell"
+                android:text="8:00-9:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum1court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum1court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow3Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tv_TS2Fr45"
+                style="@style/timingsCell"
+                android:text="9:00-10:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum2court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum2court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow4Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS3Fr45"
+                style="@style/timingsCell"
+                android:text="10:00-11:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum3court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum3court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow5Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS4Fr45"
+                style="@style/timingsCell"
+                android:text="11:00-12:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum4court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum4court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow6Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS5Fr45"
+                style="@style/timingsCell"
+                android:text="12:00-13:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum5court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum5court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow7Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS6Fr45"
+                style="@style/timingsCell"
+                android:text="13:00-14:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum6court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum6court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow8Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS7Fr45"
+                style="@style/timingsCell"
+                android:text="14:00-15:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum7court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum7court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow9Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS8Fr45"
+                style="@style/timingsCell"
+                android:text="15:00-16:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum8court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum8court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow10Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS9Fr45"
+                style="@style/timingsCell"
+                android:text="16:00-17:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum9court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum9court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow11Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvTS10"
+                style="@style/timingsCell"
+                android:text="17:00-18:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum10court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum10court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow12Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tv_TS11"
+                style="@style/timingsCell"
+                android:text="18:00-19:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum11court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum11court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tblRow13Fr45"
+            style="@style/tblRow">
+
+            <TextView
+                android:id="@+id/tvFr45"
+                style="@style/timingsCell"
+                android:text="19:00-20:00 "></TextView>
+
+            <TextView
+                android:id="@+id/rowNum12court4"
+                style="@style/tbl2BookingCell"
+                android:layout_marginRight="3dp"></TextView>
+
+            <TextView
+                android:id="@+id/rowNum12court5"
+                style="@style/tbl2BookingCell"></TextView>
+        </TableRow>
+    </TableLayout>
+    </ScrollView>
+
+</LinearLayout>
