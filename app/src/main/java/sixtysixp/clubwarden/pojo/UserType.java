@@ -9,7 +9,7 @@ import sixtysixp.clubwarden.pojo.PasswordTbl;
 import sixtysixp.clubwarden.pojo.User;
 
 /**
- * Created by hassan on 7/14/2017.
+ * Author: Ather Iltifat
  */
 
 public class UserType {

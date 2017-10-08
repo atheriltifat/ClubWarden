@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,16 +40,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 
+/**
+ * Author: Ather Iltifat
+ */
 
 public class MainActivity extends AppCompatActivity {
-/*    final int sdk = android.os.Build.VERSION.SDK_INT;
-    if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {}
-    else {}*/
     private final static String TAG = "TestActivity";
     private List<Integer> dumpSlotRes = new ArrayList<Integer>();
     private List<Integer> dumpRows = new ArrayList<Integer>();
@@ -60,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private long minDate, maxDate;
     private int monthDay;
     private static MainActivity activityMain;
-    ////////////////////////////////////
-    //private final int interval = 1000; // 1 Second
-    //private Handler handler = new Handler();
     private int spUserID, spCourtTypeID, spClubID, spUserTypeID;
     private String  spFirstName, spLastName;
     private Toast dateBtnsToast;
@@ -76,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         String clubName = intent.getExtras().getString("clubName");
         TextView tvClubName = (TextView) findViewById(R.id.tvClubName);
         tvClubName.setText(clubName);
-       // handler.postDelayed(runnable, interval);
         Log.i(TAG, "On Create .....");
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -84,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         activityMain = this;
         dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        //dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
         getSharedPreferences();
         String strVar = String.format("Willkommen %s %s", spFirstName, spLastName);  //Wellcome
         Toast.makeText(this, strVar, Toast.LENGTH_SHORT).show();
@@ -107,15 +99,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         cal = Calendar.getInstance();
-        //////////////////////////testing///////////////////////////////////////////////////////////
-        //cal = Calendar.getInstance();
-        //cal.set(2017, 8, 21);
-        //cal.set(Calendar.HOUR_OF_DAY, 15);
-        //cal.set(Calendar.MINUTE, 30);
-        //int min = cal.get(Calendar.MINUTE);
-        //int hour = cal.get(Calendar.HOUR_OF_DAY);
-        //cal.set(Calendar.AM_PM,1);
-        ////////////////////////////////////////////////////////////////////////////////////////////
         monthDay = cal.get(Calendar.DAY_OF_MONTH);
         setDateInstance();
         minDate = cal.getTimeInMillis();
@@ -151,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "On Restart .....");
     }
 
-    ///////////////////////////////////////////// Calendar Btns ////////////////////////////////////
+    /**
+     @brief:  initialize the calendar Button which also sets the minimum and maximum date of calendar
+     **/
     private void init_calendarBtn() {
         Button calendarBtn = (Button) findViewById(R.id.calendarBtn);
         calendarBtn.setOnClickListener(
@@ -160,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
                         if(dateBtnsToast != null){
                             dateBtnsToast.cancel();
                         }
-                        //R.style.GPSTheme, AlertDialog.THEME_TRADITIONAL, AlertDialog.THEME_DEVICE_DEFAULT_DARK
                         DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this,
                                 AlertDialog.THEME_DEVICE_DEFAULT_DARK,new DatePickerDialog.OnDateSetListener() {
                             @Override
@@ -169,16 +153,6 @@ public class MainActivity extends AppCompatActivity {
                                 chainMethod();
                             }
                         }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
-                        //datePickerDialog.setCanceledOnTouchOutside(true);
-
-                        /////////////////////  testing  //////////////////////////////
-                        //Date date = new Date(minDate);
-                        //DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                        //formatter.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
-                        //String dateFormatted = formatter.format(minDate);
-                        //Calendar callio = Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin"), Locale.GERMAN);
-                        //datePickerDialog.getDatePicker().setMinDate(callio.getTimeInMillis() - 1000);
-                        ///////////////////////////////////////////////////
                         try {
                             datePickerDialog.getDatePicker().setMinDate(minDate - 1000);
                             datePickerDialog.getDatePicker().setMaxDate(maxDate);
@@ -191,6 +165,10 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+
+    /**
+     @brief:  initialize the nextDate Button which will become unworkable when it reaches the maximum date
+     **/
     private void init_nextDateBtn(){
         ImageButton nextDateBtn = (ImageButton) findViewById(R.id.nextDateBtn);
         nextDateBtn.setOnClickListener(
@@ -204,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
                             chainMethod();
                         }
                         else{
-                            // "Maximum date limit"
                             dateBtnsToast = Toast.makeText(MainActivity.this, "Maximal datum begerenzung", Toast.LENGTH_SHORT);
                             dateBtnsToast.show();
                         }
@@ -212,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+
+    /**
+     @brief:  initialize the previousDate Button which will become unworkable when it reaches the minimum date
+     **/
     private void init_previousDateBtn(){
         ImageButton previousDateBtn = (ImageButton) findViewById(R.id.previousDateBtn);
         previousDateBtn.setOnClickListener(
@@ -233,15 +214,27 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
+
+    /**
+     @brief:  this method will set the date on calendar button
+     **/
     private void set_calendarBtnTxt(){
         Button calendarBtn = (Button) findViewById(R.id.calendarBtn);
         String weekDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.GERMAN);
         String monthName = cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.GERMAN);
         DateFormat dF = new SimpleDateFormat("yy");
-        //dF.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
         String year = dF.format(cal.getTimeInMillis());
         calendarBtn.setText(weekDay +" "+ String.valueOf(cal.get(Calendar.DAY_OF_MONTH)) + "/" + monthName+ "/" + year);
     }
+
+    /**
+     @brief:  this method will do several things
+     (1) cancels the any alert
+     (2) calls removeUserInfo() to remove  user info if notification bar is visible
+     (3) calls removeSlotBorder() to removes the border from booking slot
+     (4) calls bset_calendarBtnTxt to set the date on calendar Button
+     (5) call getRegTblDataByDateFrmClient to get booking Table data by date
+     **/
     private void chainMethod(){
         if(AlertUtils.alert != null) {
             AlertUtils.alert.cancel();
@@ -253,11 +246,17 @@ public class MainActivity extends AppCompatActivity {
         APIClient apiClient = new APIClient();
         apiClient.getRegTblDataByDateFrmClient(dateFormat.format(cal.getTimeInMillis()), spClubID);
     }
+
+    /**
+     @brief:  this method will get the booking table data by date
+     **/
     public void getBookingTblData(){
         chainMethod();
     }
 
-    //////////////////////////////////////////fragment Rows/////////////////////////////////////////
+    /**
+     @brief:  when the booking has passed, this method will remove the corresponding row
+     **/
     public void removeRows() {
         if (monthDay == cal.get(Calendar.DAY_OF_MONTH)) {
             int limitLoop = getRowsLimit();
@@ -282,6 +281,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     @brief:  this method determines how many rows have to be removed
+     **/
     private int getRowsLimit(){
         int limitLoop = 0;
         String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
@@ -321,7 +324,11 @@ public class MainActivity extends AppCompatActivity {
         return limitLoop;
     }
 
-    /////////////////////////////////////////Registration table/////////////////////////////////////
+    /**
+     @brief:  this method will show the booking slot either in green or red color if ot is booked
+     green color means slot is booked by ssame person who is using the app
+     red color means slot is booked by another person
+     **/
     public void fillRegTbl(List<BookingTable> dataList){
         clearRegTable();
         for (BookingTable item  : dataList) {
@@ -330,42 +337,51 @@ public class MainActivity extends AppCompatActivity {
             int id = ResRepository.slotRes[rowNum][courtNumber];
             TextView tvBookingSlot = (TextView) findViewById(id);
             if(item.getUserID() == spUserID){
-                tvBookingSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.greenBgColor)); //#008066  green color
+                tvBookingSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.greenBgColor));
             }
             else{
-                tvBookingSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.redBgColor)); //#CD5C5C  red color
+                tvBookingSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.redBgColor));
             }
             tvBookingSlot.setTag(item);
             dumpSlotRes.add(id);
-            //BookingTable aa  = (BookingTable)tv.getTag();
         }
     }
+
+    /**
+     @brief:  this method will clear the slots(removed the green or red background color from slot)
+     **/
     private void clearRegTable(){
         if(dumpSlotRes.size() > 0) {
             for (Integer item :  dumpSlotRes) {
                 TextView tvBookingSlot = (TextView) findViewById(item);
-                tvBookingSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor)); // white color
+                tvBookingSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor));
                 tvBookingSlot.setTag(null);
             }
             dumpSlotRes.clear();
         }
     }
+
+    /**
+     @brief:  this method will show the date of tommorow when the hor is equal to 20:00 or 21:00 or 22:00 and 23:00
+     **/
     private void setDateInstance(){
-        // chks if the time has passed 8AM then it will show the next date
-/*        String hour = String.valueOf(cal.get(Calendar.HOUR)) + " " + getCurrentHour();
-        if(hour.equals("8 PM") || hour.equals("9 PM") || hour.equals("10 PM") || hour.equals("11 PM")){
-            cal.add(Calendar.DAY_OF_MONTH,1);
-        }*/
         String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
         if(hour.equals("20") || hour.equals("21") || hour.equals("22") || hour.equals("23")){
             cal.add(Calendar.DAY_OF_MONTH,1);
         }
     }
 
-   ////////////////////////////////////////Getters//////////////////////////////////////////////////
+    /**
+     @brief:  this method will get the MainActivity instance
+     @return  MainActivity
+     **/
     public static MainActivity getMainInstance(){
         return activityMain;
     }
+
+    /**
+     @brief:  this method will get shared preferences which is saved in Login Activity in this method addDataIntoSharedPref()
+     **/
     private void getSharedPreferences(){
         SharedPreferences sharedpreferences = this.getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
         spUserID = sharedpreferences.getInt("userID", -1);
@@ -380,6 +396,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ///////////////////////////////////////////fragment code////////////////////////////////////////
+    /**
+     @brief:  this method will set the ViewPager
+     @Params:  ViewPager viewPager
+     **/
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new court123Fragment(), "Platz  1-3");
@@ -403,6 +423,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     @brief:  this class will implement the ViewPager
+     **/
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -432,19 +456,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    ///////////////////////////////////////////Progress bar ////////////////////////////////////////
+    /**
+     @brief:  this method will show the booking table
+     **/
     public void showBookingTbl(){
         TableLayout tableLayout1 = (TableLayout) findViewById(R.id.tableLayout1);
         TableLayout tableLayout2 = (TableLayout) findViewById(R.id.tableLayout2);
         tableLayout1.setVisibility(View.VISIBLE);
         tableLayout2.setVisibility(View.VISIBLE);
     }
+
+    /**
+     @brief:  this method will hide the booking table
+     **/
     public void hideBookingTbl(){
         TableLayout tableLayout1 = (TableLayout) findViewById(R.id.tableLayout1);
         TableLayout tableLayout2 = (TableLayout) findViewById(R.id.tableLayout2);
         tableLayout1.setVisibility(View.GONE);
         tableLayout2.setVisibility(View.GONE);
     }
+
+    /**
+     @brief:  this method will show the progress bar
+     **/
     public void showPBar(){
         LinearLayout layoutFr123PBar = (LinearLayout) findViewById(R.id.layoutFr123PBar);
         LinearLayout layoutFr45PBar = (LinearLayout) findViewById(R.id.layoutFr45PBar);
@@ -455,6 +489,10 @@ public class MainActivity extends AppCompatActivity {
         fr123PBar.setVisibility(View.VISIBLE);
         fr45PBar.setVisibility(View.VISIBLE);
     }
+
+    /**
+     @brief:  this method will hide the progress bar
+     **/
     public void hidePBar(){
         LinearLayout layoutFr123PBar = (LinearLayout) findViewById(R.id.layoutFr123PBar);
         LinearLayout layoutFr45PBar = (LinearLayout) findViewById(R.id.layoutFr45PBar);
@@ -466,14 +504,15 @@ public class MainActivity extends AppCompatActivity {
         fr45PBar.setVisibility(View.GONE);
     }
 
-
-
-/*    private Runnable runnable = new Runnable(){
-        public void run() {
-            Toast.makeText(MainActivity.this, "C'Mom no hands!", Toast.LENGTH_SHORT).show();
-        }
-    };*/
     ///////////////////////////////////////Book/Unbook court ///////////////////////////////////////
+    /**
+     @brief:  this method will be called when the user long clicks on booking slot
+     (1) if the user is coach then this method will remove the text from notification bar and also removes border
+     (2) if the user is coach then he can remove and register any booking slot
+     (3) if the user is not coach then he can only remove his reserved booking slot and he can only reserve those slots which are
+     unreserved
+     @Params:  View v
+     **/
     public void onLongClickBookingSlot(View v){
         if(spUserTypeID == 1){
             TextView tvUserName = (TextView) findViewById(R.id.tvUserName);
@@ -490,31 +529,36 @@ public class MainActivity extends AppCompatActivity {
         String[] parts = IdAsString.split("court");
         String timeSlot = getTimeSlot(Integer.valueOf(parts[0].substring(6)));
         int courtNumber = Integer.valueOf(parts[1]);
-        // -591379 -- white color
         if (colorId == BookingSlotColor.intWhiteBgColor) {
             String msg = "Möchtet Ihr Platz " +courtNumber+ " reservieren von " + timeSlot+".";  // "Do you want to book Court " +courtNumber+ " at " + timeSlot+"."
             AlertUtils.displayAlertForBookingMainAct("Platz reservieren",msg , 1, tvBookingSlot, courtNumber, timeSlot);  // "Book court"
         }
-        // -3318692 -- red color
         else if(colorId == BookingSlotColor.intRedBgColor && spUserTypeID == 1){  // coach ID is 1
             String msg = "Möchtet Ihr Platz " +courtNumber+ " befreien  von " + timeSlot+".";  // "Do you want to unbook Court " +courtNumber+ " at " + timeSlot+"."
             AlertUtils.displayAlertForBookingMainAct("Platz befreien",msg , 2, tvBookingSlot, courtNumber, timeSlot);  // "Unbook court"
         }
-        // green color
         else if(colorId == BookingSlotColor.intGreenBgColor){
             String msg = "Möchtet Ihr Platz " +courtNumber+ " befreien  von " + timeSlot+"."; // "Do you want to unbook Court " +courtNumber+ " at " + timeSlot+"."
             AlertUtils.displayAlertForBookingMainAct("Platz befreien",msg , 3, tvBookingSlot, courtNumber, timeSlot);  // "Unbook court"
         }
     }
+
+    /**
+     @brief:  this method will book the court
+     @Params:  int courtNumber, String timeSlot
+     **/
     public void bookCourt(int courtNumber, String timeSlot){
         String bookingDate = dateFormat.format(cal.getTimeInMillis());
-        //Calendar dateTimeNow = Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin"), Locale.GERMAN);
         Calendar dateTimeNow = Calendar.getInstance();
         String dateTimeOfBooking = dateFormat.format(dateTimeNow.getTimeInMillis());
         APIClient apiClient = new APIClient();
         apiClient.bookCourt(spUserID, spClubID, spCourtTypeID, bookingDate, courtNumber, timeSlot, dateTimeOfBooking);
     }
 
+    /**
+     @brief:  this method will unbook the court only by coach
+     @Params:  TextView tvBookingSlot
+     **/
     public void unbookCourtByCoach(TextView tvBookingSlot){
     BookingTable bookingObj = (BookingTable) tvBookingSlot.getTag();
     int coachID = spUserID;
@@ -524,6 +568,11 @@ public class MainActivity extends AppCompatActivity {
     APIClient apiClient = new APIClient();
     apiClient.unbookCourtByCoach(coachID, coachClubID, bookingTblID, requestedDate);
 }
+
+    /**
+     @brief:  this method will unbook the court only by user
+     @Params:  TextView tvBookingSlot
+     **/
     public void unbookCourtByUser(TextView tvBookingSlot){
         BookingTable bookingObj = (BookingTable) tvBookingSlot.getTag();
         int bookingTblID = bookingObj.getBookingTableID();
@@ -531,6 +580,11 @@ public class MainActivity extends AppCompatActivity {
         APIClient apiClient = new APIClient();
         apiClient.unbookCourtByUser(spUserID, spClubID, bookingTblID, requestedDate);
     }
+
+    /**
+     @brief:  this method will get the time slot based on the row number
+     @Params:  int rowNum
+     **/
     private String getTimeSlot(int rowNum){
         String timeSlot = null;
         if(rowNum == 1){
@@ -571,6 +625,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return timeSlot;
     }
+
+    /**
+     @brief:  this method will get the row number based on the timeslot
+     @Params:  String timeSlot
+     **/
     private int getRowNum(String timeSlot)
     {
         int rowNum = 0;
@@ -612,6 +671,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return rowNum;
     }
+
+    /**
+     @brief:  this method will change the background color of slot to green color when the server response successfully
+     @Params:  BookingTable bookingTbl
+     **/
     public void bookCourtOnResponse(BookingTable bookingTbl){
         int rowNum = getRowNum(bookingTbl.getTimeSlot()) - 1;
         int courtNumber = bookingTbl.getCourtNumber() - 1;
@@ -622,13 +686,19 @@ public class MainActivity extends AppCompatActivity {
         tvBookingSlot.setTag(bookingTbl);
     }
 
-   ///////////////////////////////////////// Slot Border //////////////////////////////////////////
-
+    /**
+     @brief:  this method will be called when user clicks on the booking slot, this methis is doing several things.
+     (1) it will remove any previous slot border
+     (2) if the background of booking slot is white then it will fetch the whiteslotborder from drawable folder
+         if the background of booking slot is green then it will fetch the greenslotborder from drawable folder
+         if the background of booking slot is red then it will fetch the redslotborder from drawable folder
+     @Params:  TextView txtView
+     **/
     public void onClickBookingSlot(TextView txtView){
         removeSlotBorder();
         ColorDrawable tvColor = (ColorDrawable) txtView.getBackground();
         int colorId = tvColor.getColor();
-        if (colorId == BookingSlotColor.intWhiteBgColor) { // white color
+        if (colorId == BookingSlotColor.intWhiteBgColor) {
             //android:background="@drawable/bookinslot_border"
             txtView.setBackgroundResource(R.drawable.whiteslotborder);
         }
@@ -641,6 +711,13 @@ public class MainActivity extends AppCompatActivity {
         showUserInfo(txtView);
         tvBorderedSlot = txtView;
     }
+
+    /**
+     @brief:  this method will remove the slot border
+     if the booking slot background color is white then it will change the background to white and removes its border
+     if the booking slot background color is green then it will change the background to green and removes its border
+     if the booking slot background color is red then it will change the background to red and removes its border
+     **/
     private void removeSlotBorder(){
         try {
             if (tvBorderedSlot != null) {
@@ -651,12 +728,12 @@ public class MainActivity extends AppCompatActivity {
                 Paint strokePaint= (Paint) mFillPaint.get(gradientDrawable);
                 int colorId = strokePaint.getColor();
                 //tvBorderedSlot.setBackgroundResource(0);
-                if (colorId == BookingSlotColor.intWhiteBgColor) { // white color
-                    tvBorderedSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor)); // white color
+                if (colorId == BookingSlotColor.intWhiteBgColor) {
+                    tvBorderedSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor));
                 } else if (colorId == BookingSlotColor.intGreenBgColor) {
-                    tvBorderedSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.greenBgColor)); // white color
+                    tvBorderedSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.greenBgColor));
                 } else if (colorId == BookingSlotColor.intRedBgColor) {
-                    tvBorderedSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.redBgColor)); // white color
+                    tvBorderedSlot.setBackgroundColor(Color.parseColor(BookingSlotColor.redBgColor));
                 }
                 tvBorderedSlot = null;
             }
@@ -664,6 +741,11 @@ public class MainActivity extends AppCompatActivity {
         catch(Exception ex){
         }
     }
+
+    /**
+     @brief:  this method will show the user information on notification bar
+     @Params:  TextView txtView
+     **/
     private void showUserInfo(TextView txtView){
         BookingTable bookingObj = (BookingTable) txtView.getTag();
         TextView tvUserName = (TextView) findViewById(R.id.tvUserName);
@@ -679,6 +761,10 @@ public class MainActivity extends AppCompatActivity {
             tvPhnNumber.setText("");
         }
     }
+
+    /**
+     @brief:  this method will remove the user information from notification bar
+     **/
     private void removeUserInfo(){
         TextView tvUserName = (TextView) findViewById(R.id.tvUserName);
         TextView tvPhnNumber = (TextView) findViewById(R.id.tvPhnNumber);
@@ -688,10 +774,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     ////This method might not be necessary but just to xtra care we using it here /////////////////////////
+    /**
+     @brief:  this method is called only one time from court45Fragment, it removes the shared preferences saved in
+     "APIClient class" in mtehod "getRegTblDataByDateFrmClient
+     This method might not be necessary but just to take extra care we using it here
+     **/
     public void removeSharedPrefInAPIClient(){
-        //this method is called only one time from court45Fragment
-        //This removes the shared preferences
-        //in "APIClient class" mtehod "getRegTblDataByDateFrmClient"
         SharedPreferences sharedPref = getSharedPreferences("CountClickAndResponse", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPref.edit();
         edit.clear();

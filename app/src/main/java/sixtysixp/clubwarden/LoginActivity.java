@@ -1,7 +1,6 @@
 package sixtysixp.clubwarden;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -29,10 +28,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * Created by hassan on 7/10/2017.
+ * Author: Ather Iltifat
  */
 
-//////////// set the user joinDate with respect to their System not with "Europe/Berlin" timezone in next update
 public class LoginActivity  extends AppCompatActivity {
     private final static String TAG = "LoginActivity";
     private static LoginActivity activityLogin;
@@ -44,25 +42,7 @@ public class LoginActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "On Create .....");
         activityLogin = this;
-
-        /////////////////////// testing //////////////////////
-/*        SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        int userId = sharedpreferences.getInt("userID",-1);
-        if(userId != -1) {
-            editor.remove("userID");
-        }*/
-/*        editor.putString("firstName", "fvd");
-        editor.putString("lastName", "fgdc");
-        editor.putString("phoneNo","fgdc");
-        editor.putString("joinDate","2017/09/19 05:56:29");*/
-        //editor.commit();
-        //editor.putInt("userID", 1);
-        //editor.commit();
-
-        //////////////////////////////////////////////////////
         getUserIdFromDevice();
-
     }
 
     @Override
@@ -101,7 +81,9 @@ public class LoginActivity  extends AppCompatActivity {
         Log.i(TAG, "On Restart .....");
     }
 
-    //////////////////////////////////////////// Login //////////////////////////////////////////
+    /**
+     @brief:  checks the format of user credentials after that it will verify password and then add user
+     **/
     private void onClickloginBtn(){
         try {
             chngBgOfEditView();
@@ -109,8 +91,8 @@ public class LoginActivity  extends AppCompatActivity {
             String lName = lastName.getText().toString();
             String phone = phoneNo.getText().toString();
             String passWord = password.getText().toString();
-            String[] inputStrings = trimInputString(fName, lName, phone);  //trim() removes the leading and trailing spaces from string
-            fName = inputStrings[0];                                       // trim() will throw error if string is null
+            String[] inputStrings = trimInputString(fName, lName, phone);
+            fName = inputStrings[0];
             lName = inputStrings[1];
             phone = inputStrings[2];
             if (chkEmptyOrNullStr(fName, lName, phone, passWord)) {
@@ -130,6 +112,15 @@ public class LoginActivity  extends AppCompatActivity {
             toast.show();
         }
     }
+
+    /**
+     @brief:  checks whether userID is already save in shared preferences in mobile if it does not then one of the two things
+     might happen.
+     (1) checks whether the user exist in database. (This scenario will happen if user send the request to register
+          in database but couldnt receive the respone from server)
+     (2) initialize or show Login screen.
+     and if the userID is saved on device then it will get the data of user from database from userID
+     **/
     public void getUserIdFromDevice(){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
         int userId = sharedpreferences.getInt("userID",-1);
@@ -155,6 +146,9 @@ public class LoginActivity  extends AppCompatActivity {
         }
     }
 
+    /**
+     @brief:  shows login screen
+     **/
     private void initLoginForm(){
         setContentView(R.layout.activity_login);
         firstName = (EditText) findViewById(R.id.firstName);
@@ -184,6 +178,10 @@ public class LoginActivity  extends AppCompatActivity {
 
         initLoginBtn();
     }
+
+    /**
+     @brief:  initialize Login Button
+     **/
     private void initLoginBtn(){
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(
@@ -194,9 +192,13 @@ public class LoginActivity  extends AppCompatActivity {
                 }
         );
     }
-    /////////////////////////////////////////// Validation //////////////////////////////////////
+
+    /**
+     @brief:  removes the leading and trailing spaces from string
+     @Params:  String fName, String lName, String phone
+     @return:  String[]
+     **/
     private String[] trimInputString(String fName, String lName, String phone){
-        //trim() removes the leading and trailing spaces from string
         // trim() will throw error if string is null
         if(fName!=null){
             fName = fName.trim();
@@ -218,6 +220,12 @@ public class LoginActivity  extends AppCompatActivity {
         String[] inputStrings = {fName, lName, phone};
         return inputStrings;
     }
+
+    /**
+     @brief:  checks if user credential is null or empty if it is then it will show the red border on the null or empty field
+     @Params:  String fName, String lName, String phone, String passWord
+     @return:  boolean
+     **/
     private boolean chkEmptyOrNullStr(String fName, String lName, String phone, String passWord){
         boolean isValid = true;
         String msg = null;
@@ -252,12 +260,20 @@ public class LoginActivity  extends AppCompatActivity {
         return isValid;
     }
 
+    /**
+     @brief:  removes the red border from field if there is any
+     **/
     private void chngBgOfEditView(){
         firstName.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor));
         lastName.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor));
         phoneNo.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor));
         password.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor));
     }
+
+    /**
+     @brief:  checks the status of user whether he is inactive/ need approval from coach/ banned
+     @return:  boolean
+     **/
     private boolean chkUserStatus(){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
         Boolean isAllowed = false;
@@ -267,7 +283,6 @@ public class LoginActivity  extends AppCompatActivity {
         if(!isBan) {
             if (isApprove) {
                 if(isAct){
-                    //jumpToMainActivity();
                     isAllowed = true;
                 }
                 else{
@@ -291,7 +306,10 @@ public class LoginActivity  extends AppCompatActivity {
         return isAllowed;
     }
 
-    /////////////////////////////////////////// Shared Preference ////////////////////////////////
+    /**
+     @brief:  adds the user data from database into shared preferences on device
+     @Params:  User user
+     **/
     private void addDataIntoSharedPref(User user){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -311,9 +329,16 @@ public class LoginActivity  extends AppCompatActivity {
         editor.putInt("courtTypeID", 1);
         editor.putInt("clubID", 1);
         editor.commit();
-
         clubName = user.getClub().getClubName();
     }
+
+    /**
+     @brief:  this method will save the user data in device before sending it to server,this method will be userful if the user
+     sends the request to server but it could not get the response from server and the data is saved in server,
+     so when the user try again or restart the app he does not have to re enter his credentials again and there will be
+     no multiple entries of same user in database
+     @Params:  String firstName, String lastName, String phoneNo, String joinDate
+     **/
     public void addTempSharedPref(String firstName, String lastName, String phoneNo, String joinDate){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -323,6 +348,10 @@ public class LoginActivity  extends AppCompatActivity {
         editor.putString("joinDate",joinDate);
         editor.commit();
     }
+
+    /**
+     @brief:  removes shared preferences from mobile
+     **/
     public void removeSharedPref(){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -330,16 +359,29 @@ public class LoginActivity  extends AppCompatActivity {
         editor.commit();
     }
 
-    ///////////////////////////////////////////// public method //////////////////////////////////
+    /**
+     @brief:  get the instance of login activity
+     @return:  LoginActivity
+     **/
     public static LoginActivity getLoginInstance(){
         return activityLogin;
     }
+
+    /**
+     @brief:  focus the password field on login screen if the user enters the incorrect password
+     **/
     public void focusPasswordField(){
         password.requestFocus();
         password.setText("");
         InputMethodManager iMM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         iMM.showSoftInput(password, InputMethodManager.SHOW_IMPLICIT);
     }
+
+    /**
+     @brief:  this method will check the user status if he is not inactive and approved and not banned then the app
+     will jump to main activity
+     @Params:  User user
+     **/
     public void chainMethod(User user){
         addDataIntoSharedPref(user);
         if(chkUserStatus()){
@@ -347,107 +389,14 @@ public class LoginActivity  extends AppCompatActivity {
         }
     }
 
-    ///////////////////////////////////////////// private method /////////////////////////////////
+    /**
+     @brief:  this method will jump to mainActivity
+     **/
     private void jumpToMainActivity(){
         Intent i = new Intent(getApplicationContext(),MainActivity.class);
         i.putExtra("clubName", clubName);
         startActivity(i);
         finish();
     }
-
-
-
-
-    //////////////////////////////////////////// Do not delete these methods///////////////////////
-
-/*    private boolean chkInputStrLength(String fName, String lName, String phone, String passWord){
-        boolean isValid = true;
-        int charLimit = 20;
-        InputMethodManager iMM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(fName.length() >= charLimit){
-            firstName.setText("");
-            firstName.requestFocus();
-            iMM.showSoftInput(firstName, InputMethodManager.SHOW_IMPLICIT);
-            Toast toast = Toast.makeText(LoginActivity.this,"Limit is 20 characters", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.show();
-            isValid = false;
-        }
-        else if(lName.length() >= charLimit){
-            lastName.setText("");
-            lastName.requestFocus();
-            iMM.showSoftInput(lastName, InputMethodManager.SHOW_IMPLICIT);
-            Toast toast = Toast.makeText(LoginActivity.this,"Limit is 20 characters", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.show();
-            isValid = false;
-        }
-        else if(phone.length() >= charLimit){
-            phoneNo.setText("");
-            phoneNo.requestFocus();
-            iMM.showSoftInput(phoneNo, InputMethodManager.SHOW_IMPLICIT);
-            Toast toast = Toast.makeText(LoginActivity.this,"Limit is 20 characters", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.show();
-            isValid = false;
-        }
-        else if(passWord.length() >= charLimit){
-            password.setText("");
-            password.requestFocus();
-            iMM.showSoftInput(password, InputMethodManager.SHOW_IMPLICIT);
-            Toast toast = Toast.makeText(LoginActivity.this,"Incorrect Password", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.show();
-            isValid = false;
-        }
-
-        return isValid;
-    }*/
-
-/*    private boolean chkPhnNoFormat(String phnNumber){
-        boolean isValid = true;
-        if(phnNumber.matches(".*[a-zA-Z]+.*")){  //return true if it matches atleast one alphabet.
-            isValid = false;
-        }
-        else{
-
-*//*            char[] specialCh = {'\\' , '\'' , '`' , '~' , '!' , '@' , '$' , '%' , '^' , '&' , '*' , '_' , '=' ,
-                    '{' , '}' , '[' , ']' , '|' , ';' , ':' , ',' , '.' , '<' , '>' , '"' , '?' , '/' };*//*
-
-            char[] phnNumArray = phnNumber.toCharArray();
-            char[] specialCh = {'(' , ')' , '-' , '+' , '#' };
-            for(int i = 0; i<phnNumArray.length; i++){
-                if( !(phnNumArray[i] >= '0' && phnNumArray[i] <= '9') ) {
-                    for (int j = 0; j < specialCh.length; j++) {
-                        if (phnNumArray[i] != specialCh[j]) {
-                            isValid = false;
-                            break;
-                        }
-                    }
-                }
-                if (!isValid) {
-                    break;
-                }
-            }
-        }
-        if(!isValid){
-            InputMethodManager iMM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            phoneNo.requestFocus();
-            iMM.showSoftInput(phoneNo, InputMethodManager.SHOW_IMPLICIT);
-            Toast toast = Toast.makeText(LoginActivity.this,"Phone number is incorrect", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.show();
-        }
-        return isValid;
-    }*/
-/*    private void doActionOnInvaildation(View view, String msg){
-        //InputMethodManager iMM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        //iMM.showSoftInput(firstName, InputMethodManager.SHOW_IMPLICIT);
-        view.setBackgroundResource(R.drawable.redborderlogin);
-        view.requestFocus();
-        AlertUtils.displayAlert5LoginAct(msg);
-    }*/
-
-
 
 }

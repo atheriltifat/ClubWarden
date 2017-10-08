@@ -1,7 +1,7 @@
 package sixtysixp.clubwarden.staticClass;
 
 /**
- * Created by hassan on 8/21/2017.
+ * Author: Ather Iltifat
  */
 
 public class BookingSlotColor {

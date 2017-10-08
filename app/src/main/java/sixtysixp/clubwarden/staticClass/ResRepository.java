@@ -3,7 +3,7 @@ package sixtysixp.clubwarden.staticClass;
 import sixtysixp.clubwarden.R;
 
 /**
- * Created by hassan on 7/5/2017.
+ * Author: Ather Iltifat
  */
 
 public class ResRepository {

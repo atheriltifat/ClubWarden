@@ -8,7 +8,7 @@ import java.util.List;
 import sixtysixp.clubwarden.pojo.BookingTable;
 
 /**
- * Created by hassan on 8/5/2017.
+ * Author: Ather Iltifat
  */
 
 public class CourtType {

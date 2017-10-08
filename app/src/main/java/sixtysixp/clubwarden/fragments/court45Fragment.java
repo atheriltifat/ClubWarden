@@ -14,7 +14,7 @@ import sixtysixp.clubwarden.R;
 import sixtysixp.clubwarden.staticClass.ResRepository;
 
 /**
- * Created by hassan on 7/1/2017.
+ * Author: Ather Iltifat
  */
 
 public class court45Fragment extends Fragment {
@@ -60,7 +60,7 @@ public class court45Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        MainActivity.getMainInstance().removeSharedPrefInAPIClient(); // chk for description in method
+        MainActivity.getMainInstance().removeSharedPrefInAPIClient();
         MainActivity.getMainInstance().getBookingTblData();
     }
 

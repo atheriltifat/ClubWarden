@@ -13,12 +13,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
- * Created by hassan on 6/22/2017.
+ * Author: Ather Iltifat
  */
 
 public interface APIInterface {
-    //@GET("api/Booking/Get_bookingTableData_ByDate")
-    //Call<GitHubRepo> reposForUser();
 
     @GET("Booking/getBookingTblDataByDateFrmApi")
     Call<List<BookingTable>> getRegTblDataByDateFrmInterface(@Header("authorization") String authHeader,

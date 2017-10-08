@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by hassan on 6/22/2017.
+ * Author: Ather Iltifat
  */
 
 public class BookingTable {

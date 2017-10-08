@@ -15,7 +15,7 @@ import sixtysixp.clubwarden.R;
 import sixtysixp.clubwarden.staticClass.ResRepository;
 
 /**
- * Created by hassan on 7/1/2017.
+ * Author: Ather Iltifat
  */
 
 public class court123Fragment extends Fragment {
@@ -34,7 +34,6 @@ public class court123Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.i(MSG, "Fragment onCreateView .....");
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_court123, container, false);
     }
 

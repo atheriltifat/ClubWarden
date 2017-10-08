@@ -13,61 +13,41 @@ import sixtysixp.clubwarden.MainActivity;
 import sixtysixp.clubwarden.R;
 
 /**
- * Created by hassan on 7/22/2017.
+ * Author: Ather Iltifat
  */
 
 public class AlertUtils {
     public static AlertDialog alert;
-    ////////////////////////////////////////// APIClient ///////////////////////////////////////
+
     public static void displayAlertUnfixed(String title,String msg){
         AlertDialog.Builder builder;
-        //builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
         builder = new AlertDialog.Builder(LoginActivity.getLoginInstance(), R.style.MyDialogTheme);
-/*        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(this);
-        }*/
         builder.setTitle(title)
                 .setMessage(msg).setView(R.layout.dialog_divider)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
                     }
                 });
-/*                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })*/
-        //.setIcon(android.R.drawable.ic_dialog_alert)
-        //.show();
         alert = builder.create();
         alert.show();
         Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
         pbutton.setBackgroundColor(Color.parseColor("#558B2F"));
-        //alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.WHITE);
     }
-
     public static void displayAlert2LoginAct(String title,String msg){
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(LoginActivity.getLoginInstance(), R.style.MyDialogTheme);
         builder.setTitle(title)
                 .setMessage(msg).setView(R.layout.dialog_divider)
-                // TRY AGAIN
-                .setPositiveButton("VERSUCH NOCHMAL", new DialogInterface.OnClickListener() {
+                .setPositiveButton("VERSUCH NOCHMAL", new DialogInterface.OnClickListener() {  // TRY AGAIN
                     public void onClick(DialogInterface dialog, int which) {
                         LoginActivity.getLoginInstance().getUserIdFromDevice();
                     }
                 })
-                //QUIT
-                .setNegativeButton("BEENDEN", new DialogInterface.OnClickListener() {
+                .setNegativeButton("BEENDEN", new DialogInterface.OnClickListener() {  //QUIT
                     public void onClick(DialogInterface dialog, int which) {
                         LoginActivity.getLoginInstance().finish();
                     }
                 });
-        //.setIcon(android.R.drawable.ic_dialog_alert)
-        //.show();
         alert = builder.create();
         alert.show();
         alert.setCanceledOnTouchOutside(false);
@@ -76,7 +56,6 @@ public class AlertUtils {
         Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
         pbutton.setBackgroundColor(Color.parseColor("#558B2F"));
         nbutton.setBackgroundColor(Color.parseColor("#1B5E20"));
-        //alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.WHITE);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -84,7 +63,6 @@ public class AlertUtils {
         params.setMargins(0,0,20,0);
         nbutton.setLayoutParams(params);
     }
-
     public static void displayAlert3LoginAct(String title,String msg){
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(LoginActivity.getLoginInstance(), R.style.MyDialogTheme);
@@ -102,7 +80,6 @@ public class AlertUtils {
         Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
         pbutton.setBackgroundColor(Color.parseColor("#558B2F"));
     }
-
     public static void displayAlert4LoginAct(String title){
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(LoginActivity.getLoginInstance(), R.style.MyDialogTheme);
@@ -146,19 +123,11 @@ public class AlertUtils {
                         // continue with delete
                     }
                 });
-
-/*                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })*/
         alert = builder.create();
         alert.show();
         Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
         pbutton.setBackgroundColor(Color.parseColor("#558B2F"));
-        //alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.WHITE);
     }
-
     public static void displayAlertForBookingMainAct(String title, String msg, final int selector,final TextView tv,
                                                      final int courtNumber, final String timeSlot){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.getMainInstance(), R.style.MyDialogTheme);
@@ -176,8 +145,8 @@ public class AlertUtils {
                         }
                     }
                 })
-                // CANCEL
-                .setNegativeButton("ABBRUCH", new DialogInterface.OnClickListener() {
+
+                .setNegativeButton("ABBRUCH", new DialogInterface.OnClickListener() {  // CANCEL
                     public void onClick(DialogInterface dialog, int which) {
                         // do nothing
                     }
@@ -197,26 +166,21 @@ public class AlertUtils {
         params.setMargins(0,0,20,0);
         nbutton.setLayoutParams(params);
     }
-
     public static void displayAlertForRegTblMainAct(String title,String msg){
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(MainActivity.getMainInstance(), R.style.MyDialogTheme);
         builder.setTitle(title)
                 .setMessage(msg).setView(R.layout.dialog_divider)
-                // TRY AGAIN
-                .setPositiveButton("VERSUCH NOCHMAL", new DialogInterface.OnClickListener() {
+                .setPositiveButton("VERSUCH NOCHMAL", new DialogInterface.OnClickListener() {  // TRY AGAIN
                     public void onClick(DialogInterface dialog, int which) {
                         MainActivity.getMainInstance().getBookingTblData();
                     }
                 })
-                //CANCEL
-                .setNegativeButton("ABBRUCH", new DialogInterface.OnClickListener() {
+                .setNegativeButton("ABBRUCH", new DialogInterface.OnClickListener() { //CANCEL
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
-        //.setIcon(android.R.drawable.ic_dialog_alert)
-        //.show();
         alert = builder.create();
         alert.show();
         alert.setCanceledOnTouchOutside(false);
@@ -224,8 +188,6 @@ public class AlertUtils {
         Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
         pbutton.setBackgroundColor(Color.parseColor("#558B2F"));
         nbutton.setBackgroundColor(Color.parseColor("#1B5E20"));
-        //alert.getButton(alert.BUTTON_POSITIVE).setTextColor(Color.WHITE);
-
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT

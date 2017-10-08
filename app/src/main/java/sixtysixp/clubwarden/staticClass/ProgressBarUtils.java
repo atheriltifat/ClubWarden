@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 /**
- * Created by hassan on 7/22/2017.
+ * Author: Ather Iltifat
  */
 
 public class ProgressBarUtils {
@@ -27,15 +27,5 @@ public class ProgressBarUtils {
         }
         return dialog;
     }
-
-
-/*    public static ProgressDialog displayFixedProgressBar123(Context context){
-        ProgressDialog dialog = new ProgressDialog(context);
-        dialog.setMessage("Please wait");
-        dialog.show();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
-        return dialog;
-    }*/
 
 }
