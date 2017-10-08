@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  initialize the calendar Button which also sets the minimum and maximum date of calendar
+     @ brief:  initialize the calendar Button which also sets the minimum and maximum date of calendar
      **/
     private void init_calendarBtn() {
         Button calendarBtn = (Button) findViewById(R.id.calendarBtn);
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  initialize the nextDate Button which will become unworkable when it reaches the maximum date
+     @ brief:  initialize the nextDate Button which will become unworkable when it reaches the maximum date
      **/
     private void init_nextDateBtn(){
         ImageButton nextDateBtn = (ImageButton) findViewById(R.id.nextDateBtn);
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  initialize the previousDate Button which will become unworkable when it reaches the minimum date
+     @ brief:  initialize the previousDate Button which will become unworkable when it reaches the minimum date
      **/
     private void init_previousDateBtn(){
         ImageButton previousDateBtn = (ImageButton) findViewById(R.id.previousDateBtn);
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will set the date on calendar button
+     @ brief:  this method will set the date on calendar button
      **/
     private void set_calendarBtnTxt(){
         Button calendarBtn = (Button) findViewById(R.id.calendarBtn);
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will do several things
+     @ brief:  this method will do several things
      (1) cancels the any alert
      (2) calls removeUserInfo() to remove  user info if notification bar is visible
      (3) calls removeSlotBorder() to removes the border from booking slot
@@ -248,14 +248,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will get the booking table data by date
+     @ brief:  this method will get the booking table data by date
      **/
     public void getBookingTblData(){
         chainMethod();
     }
 
     /**
-     @brief:  when the booking has passed, this method will remove the corresponding row
+     @ brief:  when the booking has passed, this method will remove the corresponding row
      **/
     public void removeRows() {
         if (monthDay == cal.get(Calendar.DAY_OF_MONTH)) {
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method determines how many rows have to be removed
+     @ brief:  this method determines how many rows have to be removed
      **/
     private int getRowsLimit(){
         int limitLoop = 0;
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will show the booking slot either in green or red color if ot is booked
+     @ brief:  this method will show the booking slot either in green or red color if ot is booked
      green color means slot is booked by ssame person who is using the app
      red color means slot is booked by another person
      **/
@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will clear the slots(removed the green or red background color from slot)
+     @ brief:  this method will clear the slots(removed the green or red background color from slot)
      **/
     private void clearRegTable(){
         if(dumpSlotRes.size() > 0) {
@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will show the date of tommorow when the hor is equal to 20:00 or 21:00 or 22:00 and 23:00
+     @ brief:  this method will show the date of tommorow when the hor is equal to 20:00 or 21:00 or 22:00 and 23:00
      **/
     private void setDateInstance(){
         String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
@@ -372,15 +372,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will get the MainActivity instance
-     @return  MainActivity
+     @ brief:  this method will get the MainActivity instance
+     @ return  MainActivity
      **/
     public static MainActivity getMainInstance(){
         return activityMain;
     }
 
     /**
-     @brief:  this method will get shared preferences which is saved in Login Activity in this method addDataIntoSharedPref()
+     @ brief:  this method will get shared preferences which is saved in Login Activity in this method addDataIntoSharedPref()
      **/
     private void getSharedPreferences(){
         SharedPreferences sharedpreferences = this.getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
@@ -397,8 +397,8 @@ public class MainActivity extends AppCompatActivity {
 
     ///////////////////////////////////////////fragment code////////////////////////////////////////
     /**
-     @brief:  this method will set the ViewPager
-     @Params:  ViewPager viewPager
+     @ brief:  this method will set the ViewPager
+     @ Params:  ViewPager viewPager
      **/
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -425,7 +425,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this class will implement the ViewPager
+     @ brief:  this class will implement the ViewPager
      **/
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will show the booking table
+     @ brief:  this method will show the booking table
      **/
     public void showBookingTbl(){
         TableLayout tableLayout1 = (TableLayout) findViewById(R.id.tableLayout1);
@@ -467,7 +467,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will hide the booking table
+     @ brief:  this method will hide the booking table
      **/
     public void hideBookingTbl(){
         TableLayout tableLayout1 = (TableLayout) findViewById(R.id.tableLayout1);
@@ -477,7 +477,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will show the progress bar
+     @ brief:  this method will show the progress bar
      **/
     public void showPBar(){
         LinearLayout layoutFr123PBar = (LinearLayout) findViewById(R.id.layoutFr123PBar);
@@ -491,7 +491,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will hide the progress bar
+     @ brief:  this method will hide the progress bar
      **/
     public void hidePBar(){
         LinearLayout layoutFr123PBar = (LinearLayout) findViewById(R.id.layoutFr123PBar);
@@ -506,12 +506,12 @@ public class MainActivity extends AppCompatActivity {
 
     ///////////////////////////////////////Book/Unbook court ///////////////////////////////////////
     /**
-     @brief:  this method will be called when the user long clicks on booking slot
+     @ brief:  this method will be called when the user long clicks on booking slot
      (1) if the user is coach then this method will remove the text from notification bar and also removes border
      (2) if the user is coach then he can remove and register any booking slot
      (3) if the user is not coach then he can only remove his reserved booking slot and he can only reserve those slots which are
      unreserved
-     @Params:  View v
+     @ Params:  View v
      **/
     public void onLongClickBookingSlot(View v){
         if(spUserTypeID == 1){
@@ -544,8 +544,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will book the court
-     @Params:  int courtNumber, String timeSlot
+     @ brief:  this method will book the court
+     @ Params:  int courtNumber, String timeSlot
      **/
     public void bookCourt(int courtNumber, String timeSlot){
         String bookingDate = dateFormat.format(cal.getTimeInMillis());
@@ -556,8 +556,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will unbook the court only by coach
-     @Params:  TextView tvBookingSlot
+     @ brief:  this method will unbook the court only by coach
+     @ Params:  TextView tvBookingSlot
      **/
     public void unbookCourtByCoach(TextView tvBookingSlot){
     BookingTable bookingObj = (BookingTable) tvBookingSlot.getTag();
@@ -570,8 +570,8 @@ public class MainActivity extends AppCompatActivity {
 }
 
     /**
-     @brief:  this method will unbook the court only by user
-     @Params:  TextView tvBookingSlot
+     @ brief:  this method will unbook the court only by user
+     @ Params:  TextView tvBookingSlot
      **/
     public void unbookCourtByUser(TextView tvBookingSlot){
         BookingTable bookingObj = (BookingTable) tvBookingSlot.getTag();
@@ -582,8 +582,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will get the time slot based on the row number
-     @Params:  int rowNum
+     @ brief:  this method will get the time slot based on the row number
+     @ Params:  int rowNum
      **/
     private String getTimeSlot(int rowNum){
         String timeSlot = null;
@@ -627,8 +627,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will get the row number based on the timeslot
-     @Params:  String timeSlot
+     @ brief:  this method will get the row number based on the timeslot
+     @ Params:  String timeSlot
      **/
     private int getRowNum(String timeSlot)
     {
@@ -673,8 +673,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will change the background color of slot to green color when the server response successfully
-     @Params:  BookingTable bookingTbl
+     @ brief:  this method will change the background color of slot to green color when the server response successfully
+     @ Params:  BookingTable bookingTbl
      **/
     public void bookCourtOnResponse(BookingTable bookingTbl){
         int rowNum = getRowNum(bookingTbl.getTimeSlot()) - 1;
@@ -687,12 +687,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will be called when user clicks on the booking slot, this methis is doing several things.
+     @ brief:  this method will be called when user clicks on the booking slot, this methis is doing several things.
      (1) it will remove any previous slot border
      (2) if the background of booking slot is white then it will fetch the whiteslotborder from drawable folder
          if the background of booking slot is green then it will fetch the greenslotborder from drawable folder
          if the background of booking slot is red then it will fetch the redslotborder from drawable folder
-     @Params:  TextView txtView
+     @ Params:  TextView txtView
      **/
     public void onClickBookingSlot(TextView txtView){
         removeSlotBorder();
@@ -713,7 +713,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will remove the slot border
+     @ brief:  this method will remove the slot border
      if the booking slot background color is white then it will change the background to white and removes its border
      if the booking slot background color is green then it will change the background to green and removes its border
      if the booking slot background color is red then it will change the background to red and removes its border
@@ -743,8 +743,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will show the user information on notification bar
-     @Params:  TextView txtView
+     @ brief:  this method will show the user information on notification bar
+     @ Params:  TextView txtView
      **/
     private void showUserInfo(TextView txtView){
         BookingTable bookingObj = (BookingTable) txtView.getTag();
@@ -763,7 +763,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will remove the user information from notification bar
+     @ brief:  this method will remove the user information from notification bar
      **/
     private void removeUserInfo(){
         TextView tvUserName = (TextView) findViewById(R.id.tvUserName);
@@ -775,7 +775,7 @@ public class MainActivity extends AppCompatActivity {
 
     ////This method might not be necessary but just to xtra care we using it here /////////////////////////
     /**
-     @brief:  this method is called only one time from court45Fragment, it removes the shared preferences saved in
+     @ brief:  this method is called only one time from court45Fragment, it removes the shared preferences saved in
      "APIClient class" in mtehod "getRegTblDataByDateFrmClient
      This method might not be necessary but just to take extra care we using it here
      **/

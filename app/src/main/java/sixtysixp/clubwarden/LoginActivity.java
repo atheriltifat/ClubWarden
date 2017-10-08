@@ -82,7 +82,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  checks the format of user credentials after that it will verify password and then add user
+     @ brief:  checks the format of user credentials after that it will verify password and then add user
      **/
     private void onClickloginBtn(){
         try {
@@ -114,7 +114,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  checks whether userID is already save in shared preferences in mobile if it does not then one of the two things
+     @ brief:  checks whether userID is already save in shared preferences in mobile if it does not then one of the two things
      might happen.
      (1) checks whether the user exist in database. (This scenario will happen if user send the request to register
           in database but couldnt receive the respone from server)
@@ -147,7 +147,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  shows login screen
+     @ brief:  shows login screen
      **/
     private void initLoginForm(){
         setContentView(R.layout.activity_login);
@@ -180,7 +180,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  initialize Login Button
+     @ brief:  initialize Login Button
      **/
     private void initLoginBtn(){
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
@@ -194,9 +194,9 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  removes the leading and trailing spaces from string
-     @Params:  String fName, String lName, String phone
-     @return:  String[]
+     @ brief:  removes the leading and trailing spaces from string
+     @ Params:  String fName, String lName, String phone
+     @ return:  String[]
      **/
     private String[] trimInputString(String fName, String lName, String phone){
         // trim() will throw error if string is null
@@ -222,9 +222,9 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  checks if user credential is null or empty if it is then it will show the red border on the null or empty field
-     @Params:  String fName, String lName, String phone, String passWord
-     @return:  boolean
+     @ brief:  checks if user credential is null or empty if it is then it will show the red border on the null or empty field
+     @ Params:  String fName, String lName, String phone, String passWord
+     @ return:  boolean
      **/
     private boolean chkEmptyOrNullStr(String fName, String lName, String phone, String passWord){
         boolean isValid = true;
@@ -261,7 +261,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  removes the red border from field if there is any
+     @ brief:  removes the red border from field if there is any
      **/
     private void chngBgOfEditView(){
         firstName.setBackgroundColor(Color.parseColor(BookingSlotColor.whiteBgColor));
@@ -271,8 +271,8 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  checks the status of user whether he is inactive/ need approval from coach/ banned
-     @return:  boolean
+     @ brief:  checks the status of user whether he is inactive/ need approval from coach/ banned
+     @ return:  boolean
      **/
     private boolean chkUserStatus(){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
@@ -307,8 +307,8 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  adds the user data from database into shared preferences on device
-     @Params:  User user
+     @ brief:  adds the user data from database into shared preferences on device
+     @ Params:  User user
      **/
     private void addDataIntoSharedPref(User user){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
@@ -333,11 +333,11 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will save the user data in device before sending it to server,this method will be userful if the user
+     @ brief:  this method will save the user data in device before sending it to server,this method will be userful if the user
      sends the request to server but it could not get the response from server and the data is saved in server,
      so when the user try again or restart the app he does not have to re enter his credentials again and there will be
      no multiple entries of same user in database
-     @Params:  String firstName, String lastName, String phoneNo, String joinDate
+     @ Params:  String firstName, String lastName, String phoneNo, String joinDate
      **/
     public void addTempSharedPref(String firstName, String lastName, String phoneNo, String joinDate){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
@@ -350,7 +350,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  removes shared preferences from mobile
+     @ brief:  removes shared preferences from mobile
      **/
     public void removeSharedPref(){
         SharedPreferences sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
@@ -360,15 +360,15 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  get the instance of login activity
-     @return:  LoginActivity
+     @ brief:  get the instance of login activity
+     @ return:  LoginActivity
      **/
     public static LoginActivity getLoginInstance(){
         return activityLogin;
     }
 
     /**
-     @brief:  focus the password field on login screen if the user enters the incorrect password
+     @ brief:  focus the password field on login screen if the user enters the incorrect password
      **/
     public void focusPasswordField(){
         password.requestFocus();
@@ -378,9 +378,9 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will check the user status if he is not inactive and approved and not banned then the app
+     @ brief:  this method will check the user status if he is not inactive and approved and not banned then the app
      will jump to main activity
-     @Params:  User user
+     @ Params:  User user
      **/
     public void chainMethod(User user){
         addDataIntoSharedPref(user);
@@ -390,7 +390,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
     /**
-     @brief:  this method will jump to mainActivity
+     @ brief:  this method will jump to mainActivity
      **/
     private void jumpToMainActivity(){
         Intent i = new Intent(getApplicationContext(),MainActivity.class);

@@ -33,7 +33,7 @@ public class APIClient {
     private Retrofit retrofit;
 
     /**
-     @brief:  the constructor will set the authHeader which is used by Web API without it, it will not process the requet.
+     @ brief:  the constructor will set the authHeader which is used by Web API without it, it will not process the requet.
      the constructor will also set the readtime out and connection time out, it also saves the main URL of web api
      **/
     public APIClient(){
@@ -57,13 +57,13 @@ public class APIClient {
 
     ////////////////////////////////"2016/01/15 00:00:00"///////////////////////////////////////////
     /**
-     @brief:  this method will get the registraion or booking table data by date.
+     @ brief:  this method will get the registraion or booking table data by date.
      it hides the booking table and shows the progress bar when the request is made to server and shows the booking table and hide
      the progress bar on response from server.
      It also uses the shared pref used in this method to synchronize the no.of click (next and previous date btn)
      to exact response i.e when the user fastly clicks the next or previous Button it will only show the booking table data
      of the date on which the user stops.
-     @Params:  String requestedDate, int clubID
+     @ Params:  String requestedDate, int clubID
      **/
     public void getRegTblDataByDateFrmClient(String requestedDate, int clubID){
         //
@@ -142,8 +142,8 @@ public class APIClient {
 
 
     /**
-     @brief:  this method will send the request to server to book court.
-     @Params:  int userID, int clubID, int courtTypeID, String bookingDate, int courtNumber, String timeSlot,
+     @ brief:  this method will send the request to server to book court.
+     @ Params:  int userID, int clubID, int courtTypeID, String bookingDate, int courtNumber, String timeSlot,
      String dateTimeOfBooking
      **/
     public void bookCourt(int userID, int clubID, int courtTypeID, String bookingDate, int courtNumber, String timeSlot,
@@ -194,8 +194,8 @@ public class APIClient {
     }
 
     /**
-     @brief:  this method will send the request to server to unbook court by coach.
-     @Params:  int coachID, int coachClubID, int bookingTblID, String requestedDate
+     @ brief:  this method will send the request to server to unbook court by coach.
+     @ Params:  int coachID, int coachClubID, int bookingTblID, String requestedDate
      **/
     public void unbookCourtByCoach(int coachID, int coachClubID, int bookingTblID, String requestedDate){
         APIInterface apiInterface = retrofit.create(APIInterface.class);
@@ -233,8 +233,8 @@ public class APIClient {
     }
 
     /**
-     @brief:  this method will send the request to server to unbook court by user.
-     @Params:  int userID, int clubID, int bookingTblID, String requestedDate
+     @ brief:  this method will send the request to server to unbook court by user.
+     @ Params:  int userID, int clubID, int bookingTblID, String requestedDate
      **/
     public void unbookCourtByUser(int userID, int clubID, int bookingTblID, String requestedDate){
         APIInterface apiInterface = retrofit.create(APIInterface.class);
@@ -286,9 +286,9 @@ public class APIClient {
 
     ////////////////////////////  Login Activity ///////////////////////////////////////////////////
     /**
-     @brief:  this method will send the request to server of user date and password to register into the database if the credentials
+     @ brief:  this method will send the request to server of user date and password to register into the database if the credentials
      and password is correct then the server will accept the request
-     @Params:  String firstName, String lastName, String phoneNo, String joinDate,String password
+     @ Params:  String firstName, String lastName, String phoneNo, String joinDate,String password
      **/
     public void verifyPassAndAddUser(String firstName, String lastName, String phoneNo, String joinDate,String password){
         APIInterface apiInterface = retrofit.create(APIInterface.class);
@@ -340,9 +340,9 @@ public class APIClient {
     }
 
     /**
-     @brief:  this method will get the user by ID from server
+     @ brief:  this method will get the user by ID from server
      and password is correct then the server will accept the request
-     @Params:  int userId
+     @ Params:  int userId
      **/
     public void getUserByIdFromClient(int userId){
         APIInterface apiInterface = retrofit.create(APIInterface.class);
@@ -378,9 +378,9 @@ public class APIClient {
     }
 
     /**
-     @brief:  this method will get the user by name, last name, phone and join date, if it receives the message of multiple user
+     @ brief:  this method will get the user by name, last name, phone and join date, if it receives the message of multiple user
      or not found then it will remove the sa=hared pref
-     @Params:  String fname, String lname, String phone, String joinDate
+     @ Params:  String fname, String lname, String phone, String joinDate
      **/
     public void getUserByNamePhoneAndDate(String fname, String lname, String phone, String joinDate){
         APIInterface apiInterface = retrofit.create(APIInterface.class);
